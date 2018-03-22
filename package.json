@@ -5,12 +5,13 @@
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
+    "dev": "electron-forge start --debug",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --cache --color --ext .jsx,.js src"
   },
-  "author": "",
+  "author": "Joe Danks",
   "config": {
     "forge": {
       "make_targets": {
@@ -29,7 +30,7 @@
         "packageManager": "npm"
       },
       "electronWinstallerConfig": {
-        "name": "my_new_project"
+        "name": "electron_jeopardy"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
@@ -39,7 +40,7 @@
       },
       "windowsStoreConfig": {
         "packageName": "",
-        "name": "mynewproject"
+        "name": "electronjeopardy"
       }
     }
   },
