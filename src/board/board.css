@@ -1,0 +1,66 @@
+html {
+    height: 100%;
+}
+
+#App {
+    height: 100%;
+}
+
+.board {
+    display: flex;
+    justify-content: space-evenly;
+    width: 75%;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 16.66%;
+}
+
+.column .split {
+    background-color: #9e945f;
+    height: 4%;
+    width: 100%;
+}
+
+.cell {
+    align-items: center;
+    justify-content: center;
+    background-color: #b83025;
+    border: 2px solid #9e945f;
+    color: white;
+    display: flex;
+    width: 100%;
+    height: 16%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.cell .div {
+    align-self: center;
+}
+
+.number::before {
+    content: '$';
+}
+.number {
+    font-size: xx-large;
+}
+
+.answer {
+    font-size: large;
+}
+
+.text {
+    font-size: x-large;
+}

@@ -2,7 +2,7 @@
   "name": "electron-jeopardy",
   "version": "0.1.0",
   "description": "Jeopardy style game",
-  "main": "main.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
