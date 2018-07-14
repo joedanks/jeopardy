@@ -1,4 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { toggleQuestionSelected } from '../actions/question';
 
 const NUMBER = 'NUMBER';
 const ANSWER = 'ANSWER';
@@ -6,7 +8,7 @@ const EMPTY = 'EMPTY';
 const TEXT = 'TEXT';
 
 
-export default class Cell extends Component {
+class Cell extends Component {
 
     constructor(props) {
         super();
@@ -30,12 +32,29 @@ export default class Cell extends Component {
                 return EMPTY;
         }
     }
-    
+
+    nextStateAvailable(currentState) {
+        switch (currentState) {
+            case NUMBER:
+                return !this.props.questionSelected;
+            case ANSWER:
+                return true;
+            case TEXT:
+                return true;
+            case EMPTY:
+            default:
+                return false;
+        }
+    }
+
     cycleState() {
         this.setState(prevState => {
-            return {
-                state: this.getNextState(prevState.state)
-            };
+            if (this.nextStateAvailable(prevState.state)) {
+                this.props.toggleQuestionSelected();
+                return {
+                    state: this.getNextState(prevState.state)
+                };
+            }
         });
     }
 
@@ -61,3 +80,16 @@ export default class Cell extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    questionSelected: state.question.selected
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    toggleQuestionSelected: () => dispatch(toggleQuestionSelected())
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Cell);
