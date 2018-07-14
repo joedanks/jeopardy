@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toggleQuestionSelected } from '../actions/question';
+import { toggleQuestionSelected, setQuestionValue } from '../actions/question';
 
 const NUMBER = 'NUMBER';
 const ANSWER = 'ANSWER';
@@ -51,6 +51,7 @@ class Cell extends Component {
         this.setState(prevState => {
             if (this.nextStateAvailable(prevState.state)) {
                 this.props.toggleQuestionSelected();
+                this.props.setQuestionValue(this.props.value);
                 return {
                     state: this.getNextState(prevState.state)
                 };
@@ -86,7 +87,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    toggleQuestionSelected: () => dispatch(toggleQuestionSelected())
+    toggleQuestionSelected: () => dispatch(toggleQuestionSelected()),
+    setQuestionValue: (value) => dispatch(setQuestionValue(value))
 })
 
 export default connect(

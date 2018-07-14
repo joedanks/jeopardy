@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import Column from './column';
-import {data} from '../data/sampleGame1';
+import Team from './team';
 
 import './panel.css';
 
@@ -8,7 +7,8 @@ export default class Panel extends Component {
     render() {
         return (
             <div className='panel'>
-                
+                <div className='title'>Teams</div>
+                <Team name={'Awesomeness'} score={300}/>
             </div>
         );
     }
