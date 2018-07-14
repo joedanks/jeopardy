@@ -2,6 +2,8 @@
     width: 25%;
     background-color: #293b29;
     color: #e0cc01;
+    display: flex;
+    flex-direction: column;
 }
 
 .title {
@@ -14,8 +16,15 @@
 }
 
 .team {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    grid-template-columns: 20% 50% 30%;
+    grid-template-rows: 30px;
+}
+
+.team .button {
+    text-align: right;
 }
 
 .team .name {

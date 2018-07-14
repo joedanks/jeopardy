@@ -6,10 +6,10 @@ import './panel.css';
 
 class Panel extends Component {
     buildTeams() {
-        return Object.keys(this.props.teams).map((name) => {
+        return Object.keys(this.props.teams).map((name, i) => {
             const score = this.props.teams[name];
 
-            return (<Team name={name} score={score} />);
+            return (<Team key={i} name={name} score={score} />);
         })
     }
     render() {

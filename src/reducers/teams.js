@@ -1,5 +1,6 @@
 const initialState = {
-    'Awesome': 0
+    'Awesome': 0,
+    'Two': 0
 }
 
 const teams = (state = initialState, action) => {

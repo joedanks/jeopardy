@@ -21,7 +21,7 @@ class Team extends Component {
     render() {
         return (
             <div className='team'>
-                <div>{this.props.questionSelected ? this.getAddScoreButton() : null}</div>
+                <div className='button'>{this.props.questionSelected ? this.getAddScoreButton() : null}</div>
                 <div className='name'>{this.props.name}</div>
                 <div className='score'>{this.props.score}</div>
             </div>
