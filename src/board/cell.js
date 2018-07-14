@@ -57,12 +57,23 @@ class Cell extends Component {
             case NUMBER:
                 return (<div className='number clickable'>{this.props.value}</div>);
             case ANSWER:
-                return (<div className='answer'>{this.props.text}</div>);
+                if (this.props.questionSelected) {
+                    return (<div className='answer'>{this.props.text}</div>);
+                }
+                return null;
             case TEXT:
                 return (<div className='text'>{this.props.text}</div>);
             case EMPTY:
             default:
                 return null;
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.questionSelected && !this.props.questionSelected && prevState.state === ANSWER) {
+            this.setState({
+                state: this.getNextState(prevState.state)
+            });
         }
     }
 
@@ -79,10 +90,10 @@ const mapStateToProps = (state) => ({
     questionSelected: state.question.selected
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    toggleQuestionSelected: () => dispatch(toggleQuestionSelected()),
-    setQuestionValue: (value) => dispatch(setQuestionValue(value))
-})
+const mapDispatchToProps = {
+    toggleQuestionSelected,
+    setQuestionValue
+}
 
 export default connect(
     mapStateToProps,

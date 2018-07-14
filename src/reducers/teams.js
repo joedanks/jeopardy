@@ -1,6 +1,8 @@
-const initialState = {}
+const initialState = {
+    'Awesome': 0
+}
 
-const question = (state = initialState, action) => {
+const teams = (state = initialState, action) => {
     switch (action.type) {
         case 'NEW_TEAM':
             return {
@@ -17,4 +19,4 @@ const question = (state = initialState, action) => {
     }
 }
 
-export default question;
+export default teams;

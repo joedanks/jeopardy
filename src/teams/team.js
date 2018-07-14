@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { awardPoints } from '../actions/points';
 
 import './panel.css';
 
 class Team extends Component {
-    // constructor(props) {
-    //     super(props);
+    constructor(props) {
+        super(props);
 
-    //     this.state = {};
-    // }
+        this.addPoints = this.addPoints.bind(this);
+    }
+    addPoints() {
+        this.props.awardPoints(this.props.name, this.props.questionValue);
+    }    
     getAddScoreButton() {
         return (
-            <ion-icon name="add-circle-outline"></ion-icon>
+            <ion-icon name="add-circle-outline" onClick={this.addPoints}></ion-icon>
         );
     }
     render() {
@@ -27,11 +31,13 @@ class Team extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    questionSelected: state.question.selected
+    questionSelected: state.question.selected,
+    questionValue: state.question.value
 })
 
-const mapDispatchToProps = (dispatch) => ({
-})
+const mapDispatchToProps = {
+    awardPoints
+}
 
 export default connect(
     mapStateToProps,
