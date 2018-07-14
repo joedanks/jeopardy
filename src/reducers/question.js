@@ -15,6 +15,11 @@ const question = (state = initialState, action) => {
                 ...state,
                 value: action.value
             }
+        case 'AWARD_POINTS':
+            return {
+                selected: false,
+                value: 0
+            }
         default:
             return state;
     }

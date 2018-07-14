@@ -29,3 +29,8 @@
 .team .score {
     font-size: large;
 }
+
+ion-icon[name = "add-circle-outline"] {
+    cursor: pointer;
+    font-size: x-large;
+}

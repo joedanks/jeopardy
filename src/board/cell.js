@@ -34,35 +34,28 @@ class Cell extends Component {
     }
 
     nextStateAvailable(currentState) {
-        switch (currentState) {
-            case NUMBER:
-                return !this.props.questionSelected;
-            case ANSWER:
-                return true;
-            case TEXT:
-                return true;
-            case EMPTY:
-            default:
-                return false;
+        if (currentState === NUMBER) {
+            return !this.props.questionSelected;
         }
+        return false;
     }
 
     cycleState() {
-        this.setState(prevState => {
-            if (this.nextStateAvailable(prevState.state)) {
+        if (this.nextStateAvailable(this.state.state)) {
+            this.setState(prevState => {
                 this.props.toggleQuestionSelected();
                 this.props.setQuestionValue(this.props.value);
                 return {
                     state: this.getNextState(prevState.state)
                 };
-            }
-        });
+            });
+        }
     }
 
     renderContent() {
         switch (this.state.state) {
             case NUMBER:
-                return (<div className='number'>{this.props.value}</div>);
+                return (<div className='number clickable'>{this.props.value}</div>);
             case ANSWER:
                 return (<div className='answer'>{this.props.text}</div>);
             case TEXT:
