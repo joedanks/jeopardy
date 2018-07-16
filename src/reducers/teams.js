@@ -1,7 +1,4 @@
-const initialState = {
-    'Awesome': 0,
-    'Two': 0
-}
+const initialState = {}
 
 const teams = (state = initialState, action) => {
     switch (action.type) {
