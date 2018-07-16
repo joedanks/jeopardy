@@ -4,7 +4,6 @@ import { createStore } from 'redux';
 import './App.css';
 import Board from './board/board';
 import Panel from './teams/panel';
-import Cell from './board/cell';
 import reducer from './reducers/all';
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

@@ -8,7 +8,7 @@ const teams = (state = initialState, action) => {
         case 'NEW_TEAM':
             return {
                 ...state,
-                [action.name]: 0
+                [action.value]: 0
             }
         case 'AWARD_POINTS':
             return {

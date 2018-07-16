@@ -13,6 +13,20 @@
     justify-content: center;
     align-items: center;
     display: flex;
+    flex-direction: column;
+}
+
+.title .input-group {
+    width: 75%;
+}
+
+.add-team {
+    font-size: medium;
+    cursor: pointer;
+}
+
+.team-input {
+    font-size: medium;
 }
 
 .team {
