@@ -6,6 +6,20 @@
     flex-direction: column;
 }
 
+.panel input[type="file"] {
+    align-self: center;
+    width: 80%;
+}
+
+.game-info {
+    height: 92%;
+}
+
+.upload-answers {
+    display: flex;
+    flex-direction: column;
+}
+
 .title {
     width: 100%;
     height: 20%;

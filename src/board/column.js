@@ -5,8 +5,8 @@ const cellValues = [200, 400, 600, 800, 1000];
 
 export default class Column extends Component {
     renderCells(columnInfo) {
-        return columnInfo.values.map((info, i) => {
-            return (<Cell key={i} value={cellValues[i]} text={info.answer} />);
+        return columnInfo.answers.map((answer, i) => {
+            return (<Cell key={i} value={cellValues[i]} text={answer} />);
         });
     }
     render() {

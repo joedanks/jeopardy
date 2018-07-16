@@ -1,21 +1,29 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Column from './column';
-import {data} from '../data/sampleGame1';
 
 import './board.css';
 
-export default class Board extends Component {
+class Board extends Component {
     renderColumns(data) {
         return data.map((columnInfo, i) => {
-            return (<Column key={i} columnInfo={columnInfo}/>);
+            return (<Column key={i} columnInfo={columnInfo} />);
         })
     }
     render() {
         return (
             <div className='board'>
-                {this.renderColumns(data)}
+                {this.renderColumns(this.props.data)}
             </div>
         );
     }
 
 }
+
+const mapStateToProps = (state) => ({
+    data: state.question.data
+})
+
+export default connect(
+    mapStateToProps
+)(Board);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Team from './team';
 import { newTeam } from '../actions/teams';
+import UploadAnswers from './uploadAnswers';
 
 import './panel.css';
 
@@ -74,11 +75,14 @@ class Panel extends Component {
     render() {
         return (
             <div className='panel'>
-                <div className='title'>
-                    <div>Teams</div>
-                    {this.displayNewTeam()}
+                <div className='game-info'>
+                    <div className='title'>
+                        <div>Teams</div>
+                        {this.displayNewTeam()}
+                    </div>
+                    {this.buildTeams()}
                 </div>
-                {this.buildTeams()}
+                <UploadAnswers/>
             </div>
         );
     }
