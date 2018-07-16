@@ -5,15 +5,15 @@ import {data} from '../data/sampleGame1';
 import './board.css';
 
 export default class Board extends Component {
+    renderColumns(data) {
+        return data.map((columnInfo, i) => {
+            return (<Column key={i} columnInfo={columnInfo}/>);
+        })
+    }
     render() {
         return (
             <div className='board'>
-                <Column data={data} index={0}/>
-                <Column data={data} index={1}/>
-                <Column data={data} index={0}/>
-                <Column data={data} index={0}/>
-                <Column data={data} index={0}/>
-                <Column data={data} index={0}/>
+                {this.renderColumns(data)}
             </div>
         );
     }

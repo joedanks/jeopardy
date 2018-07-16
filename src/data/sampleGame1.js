@@ -1,51 +1,121 @@
 export const data = [
     {
-        title: 'OA',
+        title: 'Category 1',
         values: [
             {
-                answer: 'I am the chieftan',
-                question: '2222',
+                answer: 'I did this'
             },
             {
-                answer: 'I am a wolf',
-                question: '4',
+                answer: 'I am a wolf'
             },
             {
-                answer: 'The number of blazes that led you to us',
-                question: '6',
+                answer: 'The number of blazes that led you to us'
             },
             {
-                answer: '7',
-                question: '8',
+                answer: '7'
             },
             {
-                answer: '9',
-                question: '0',
+                answer: '9'
             }
         ]
     },
     {
-        title: 'WWW',
+        title: 'Category 2',
         values: [
             {
-                answer: '11111',
-                question: '2222',
+                answer: 'I did this'
             },
             {
-                answer: '11111',
-                question: '2222',
+                answer: 'I am a wolf'
             },
             {
-                answer: '11111',
-                question: '2222',
+                answer: 'The number of blazes that led you to us'
             },
             {
-                answer: '11111',
-                question: '2222',
+                answer: '7'
             },
             {
-                answer: '11111',
-                question: '2222',
+                answer: '9'
+            }
+        ]
+    },
+    {
+        title: 'Category 3',
+        values: [
+            {
+                answer: 'I did this'
+            },
+            {
+                answer: 'I am a wolf'
+            },
+            {
+                answer: 'The number of blazes that led you to us'
+            },
+            {
+                answer: '7'
+            },
+            {
+                answer: '9'
+            }
+        ]
+    },
+    {
+        title: 'Category 4',
+        values: [
+            {
+                answer: 'I did this'
+            },
+            {
+                answer: 'I am a wolf'
+            },
+            {
+                answer: 'The number of blazes that led you to us'
+            },
+            {
+                answer: '7'
+            },
+            {
+                answer: '9'
+            }
+        ]
+    },
+    {
+        title: 'Category 5',
+        values: [
+            {
+                answer: 'I did this'
+            },
+            {
+                answer: 'I am a wolf'
+            },
+            {
+                answer: 'The number of blazes that led you to us'
+            },
+            {
+                answer: '7'
+            },
+            {
+                answer: '9'
+            }
+        ]
+    },
+    {
+        title: 'Category 6',
+        values: [
+            {
+                answer: 'I did this'
+            },
+            {
+                answer: 'I am a wolf'
+            },
+            {
+                answer: 'The number of blazes that led you to us'
+            },
+            {
+                answer: '7'
+            },
+            {
+                answer: '9'
             }
         ]
     }

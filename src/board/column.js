@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Cell from './cell';
 
-export default function Column(props) {
-    const columnInfo = props.data[props.index];
+const cellValues = [200, 400, 600, 800, 1000];
 
-    return (
-        <div className='column'>
-            <Cell text={columnInfo.title} />
-            <div className='split' />
-            <Cell value={200} text={columnInfo.values[0].answer} />
-            <Cell value={400} text={columnInfo.values[1].answer} />
-            <Cell value={600} text={columnInfo.values[2].answer} />
-            <Cell value={800} text={columnInfo.values[3].answer} />
-            <Cell value={1000} text={columnInfo.values[4].answer} />
-        </div>
-    );
+export default class Column extends Component {
+    renderCells(columnInfo) {
+        return columnInfo.values.map((info, i) => {
+            return (<Cell key={i} value={cellValues[i]} text={info.answer} />);
+        });
+    }
+    render() {
+        return (
+            <div className='column'>
+                <Cell text={this.props.columnInfo.title} />
+                <div className='split' />
+                {this.renderCells(this.props.columnInfo)}
+            </div>
+        );
+    };
 }
