@@ -1,4 +1,4 @@
-import { access } from "fs";
+const storage = window.localStorage;
 
 const initialState = {}
 
@@ -23,6 +23,8 @@ const teams = (state = initialState, action) => {
                     }),
                     {}
                 );
+        case 'RESET':
+            return initialState;
         default:
             return state;
     }

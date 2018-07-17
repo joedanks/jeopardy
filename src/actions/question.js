@@ -11,3 +11,7 @@ export const newAnswers = (data) => ({
     type: 'NEW_ANSWERS',
     data
 })
+
+export const reset = () => ({
+    type: 'RESET'
+})

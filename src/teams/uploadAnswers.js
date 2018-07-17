@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { newAnswers } from '../actions/question';
+import { newAnswers, reset } from '../actions/question';
 
 class UploadAnswers extends Component {
     constructor(props) {
         super(props);
 
         this.uploadData = this.uploadData.bind(this);
+        this.reset = this.reset.bind(this);
     }
     uploadData(e) {
         let reader = new FileReader();
@@ -16,9 +17,15 @@ class UploadAnswers extends Component {
         }
         reader.readAsText(e.target.files[0]);
     }
+    reset() {
+        window.localStorage.clear();
+        document.querySelector("input[type='file']").value = '';
+        this.props.reset();
+    }
     render() {
         return (
             <div className='upload-answers'>
+                <input type='button' className='btn btn-link' onClick={this.reset} value='Reset All' />
                 Upload your own answers
                 <a href='./sampleGame.json' download>Sample Game</a>
                 <input type='file' accept='.json' onChange={this.uploadData} />
@@ -31,7 +38,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    newAnswers
+    newAnswers,
+    reset
 }
 
 export default connect(
