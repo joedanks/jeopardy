@@ -70,7 +70,12 @@ class Cell extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.questionSelected && !this.props.questionSelected && prevState.state === ANSWER) {
+        if (!prevProps.reset && this.props.reset && this.state.state !== TEXT) {
+            this.setState({
+                state: NUMBER
+            });
+        }
+        else if (prevProps.questionSelected && !this.props.questionSelected && prevState.state === ANSWER) {
             this.setState({
                 state: this.getNextState(prevState.state)
             });
@@ -87,7 +92,8 @@ class Cell extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    questionSelected: state.question.selected
+    questionSelected: state.question.selected,
+    reset: state.question.reset
 })
 
 const mapDispatchToProps = {

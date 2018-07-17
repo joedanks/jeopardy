@@ -1,3 +1,5 @@
+import { access } from "fs";
+
 const initialState = {}
 
 const teams = (state = initialState, action) => {
@@ -12,6 +14,15 @@ const teams = (state = initialState, action) => {
                 ...state,
                 [action.name]: state[action.name] + action.value
             }
+        case 'NEW_ANSWERS':
+            return Object.keys(state)
+                .reduce(
+                    (acc, val) => ({
+                        ...acc,
+                        [val]: 0
+                    }),
+                    {}
+                );
         default:
             return state;
     }
