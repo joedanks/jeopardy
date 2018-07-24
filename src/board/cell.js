@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toggleQuestionSelected, setQuestionValue } from '../actions/question';
+import { selectAnswer } from '../actions/question';
 
 const NUMBER = 'NUMBER';
 const ANSWER = 'ANSWER';
@@ -12,11 +12,6 @@ class Cell extends Component {
 
     constructor(props) {
         super();
-
-        const initialState = props.value ? NUMBER : TEXT;
-        this.state = {
-            state: initialState
-        }
     }
 
     getNextState(currentState) {
@@ -35,50 +30,31 @@ class Cell extends Component {
 
     nextStateAvailable(currentState) {
         if (currentState === NUMBER) {
-            return !this.props.questionSelected;
+            return !this.props.selectedAnswer;
         }
         return false;
     }
 
     cycleState() {
-        if (this.nextStateAvailable(this.state.state)) {
-            this.setState(prevState => {
-                this.props.toggleQuestionSelected();
-                this.props.setQuestionValue(this.props.value);
-                return {
-                    state: this.getNextState(prevState.state)
-                };
-            });
+        if (this.nextStateAvailable(this.props.status)) {
+            this.props.selectAnswer(this.getNextState(this.props.status), this.props.x, this.props.y, this.props.value);
         }
     }
 
     renderContent() {
-        switch (this.state.state) {
+        switch (this.props.status) {
             case NUMBER:
                 return (<div className='number clickable'>{this.props.value}</div>);
             case ANSWER:
-                if (this.props.questionSelected) {
-                    return (<div className='answer'>{this.props.text}</div>);
-                }
-                return null;
+                // if (this.props.questionSelected) {
+                return (<div className='answer'>{this.props.text}</div>);
+                // }
+                // return null;
             case TEXT:
                 return (<div className='text'>{this.props.text}</div>);
             case EMPTY:
             default:
                 return null;
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!prevProps.reset && this.props.reset && this.state.state !== TEXT) {
-            this.setState({
-                state: NUMBER
-            });
-        }
-        else if (prevProps.questionSelected && !this.props.questionSelected && prevState.state === ANSWER) {
-            this.setState({
-                state: this.getNextState(prevState.state)
-            });
         }
     }
 
@@ -91,14 +67,19 @@ class Cell extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    questionSelected: state.question.selected,
-    reset: state.question.reset
-})
+const mapStateToProps = (state, props) => {
+    let status = TEXT;
+    if (props.value) {
+        status = state.question.board[props.x][props.y]
+    }
+    return {
+        questionSelected: state.question.selectedAnswer,
+        status
+    }
+}
 
 const mapDispatchToProps = {
-    toggleQuestionSelected,
-    setQuestionValue
+    selectAnswer
 }
 
 export default connect(

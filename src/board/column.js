@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Cell from './cell';
 
 const cellValues = [200, 400, 600, 800, 1000];
 
-export default class Column extends Component {
+class Column extends Component {
     renderCells(columnInfo) {
         return columnInfo.answers.map((answer, i) => {
-            return (<Cell key={i} value={cellValues[i]} text={answer} />);
+            return (<Cell key={i} value={cellValues[i]} text={answer} x={this.props.index} y={i}/>);
         });
     }
     render() {
@@ -19,3 +20,11 @@ export default class Column extends Component {
         );
     };
 }
+
+const mapStateToProps = (state, props) => ({
+    columnInfo: state.question.data[props.index]
+})
+
+export default connect(
+    mapStateToProps
+)(Column);

@@ -13,6 +13,7 @@ class UploadAnswers extends Component {
         let reader = new FileReader();
         reader.onload = (event) => {
             // console.log(event.target.result);
+            this.props.reset();
             this.props.newAnswers(JSON.parse(event.target.result))
         }
         reader.readAsText(e.target.files[0]);
@@ -26,8 +27,9 @@ class UploadAnswers extends Component {
         return (
             <div className='upload-answers'>
                 <input type='button' className='btn btn-link' onClick={this.reset} value='Reset All' />
-                Upload your own answers
-                <a href='./sampleGame.json' download>Sample Game</a>
+                <div>
+                    Upload your own answers (<a href='./sampleGame.json' download>Sample Game</a>)
+                </div>
                 <input type='file' accept='.json' onChange={this.uploadData} />
             </div>
         );

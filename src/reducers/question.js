@@ -1,57 +1,87 @@
-import {data} from '../data/sampleGame';
+import { data } from '../data/sampleGame';
 
 const storage = window.localStorage;
 
 const initialAnswers = () => {
     const storageAnswers = storage.getItem('answers');
-    
+
     if (storageAnswers) {
         return JSON.parse(storageAnswers);
     }
     return data;
 }
 
+const initialBoard = (answers) => {
+    const storageBoard = storage.getItem('board');
+
+    if (storageBoard) {
+        return JSON.parse(storageBoard);
+    }
+
+    const board = answers.reduce((acc, column, i) => {
+        acc[i] = column.answers.reduce((accum, val, j) => {
+            accum[j] = 'NUMBER';
+            return accum;
+        }, {});
+        return acc;
+    }, {});
+
+    return board;
+}
+
 const initialState = {
-    selected: false,
-    value: 0,
     data: initialAnswers(),
-    reset: false
+    board: initialBoard(initialAnswers())
 }
 
 const question = (state = initialState, action) => {
+    let newBoard;
     switch (action.type) {
-        case 'TOGGLE_QUESTION':
+        case 'SELECT_ANSWER':
+            newBoard = {
+                ...state.board,
+                [action.x]: {
+                    ...state.board[action.x],
+                    [action.y]: action.status
+                }
+            };
+            storage.setItem('board', JSON.stringify(newBoard));
             return {
                 ...state,
-                selected: !state.selected,
-                reset: false
-            }
-        case 'SET_QUESTION_VALUE':
-            return {
-                ...state,
-                value: action.value,
-                reset: false
-            }
+                selectedAnswer: {
+                    x: action.x,
+                    y: action.y,
+                    value: action.value
+                },
+                board: newBoard
+            };
         case 'AWARD_POINTS':
+            newBoard = {
+                ...state.board,
+                [state.selectedAnswer.x]: {
+                    ...state.board[state.selectedAnswer.x],
+                    [state.selectedAnswer.y]: 'EMPTY'
+                }
+            };
+            storage.setItem('board', JSON.stringify(newBoard));
             return {
                 ...state,
-                selected: false,
-                value: 0,
-                reset: false
+                board: newBoard,
+                selectedAnswer: undefined
             }
         case 'NEW_ANSWERS':
             storage.setItem('answers', JSON.stringify(action.data));
+            newBoard = initialBoard(action.data);
+            storage.setItem('board', JSON.stringify(newBoard));
             return {
                 ...state,
-                selected: false,
-                value: 0,
                 data: action.data,
-                reset: true
+                board: newBoard
             }
         case 'RESET':
             return {
-                ...initialState,
-                reset: true
+                data: initialAnswers(),
+                board: initialBoard(initialAnswers()),
             };
         default:
             return state;

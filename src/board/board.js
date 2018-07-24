@@ -6,8 +6,8 @@ import './board.css';
 
 class Board extends Component {
     renderColumns(data) {
-        return data.map((columnInfo, i) => {
-            return (<Column key={i} columnInfo={columnInfo} />);
+        return data.map((_, i) => {
+            return (<Column key={i} index={i} />);
         })
     }
     render() {

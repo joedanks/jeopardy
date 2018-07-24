@@ -11,7 +11,7 @@ class Team extends Component {
         this.addPoints = this.addPoints.bind(this);
     }
     addPoints() {
-        this.props.awardPoints(this.props.name, this.props.questionValue);
+        this.props.awardPoints(this.props.name, this.props.selectedAnswer.value);
     }    
     getAddScoreButton() {
         return (
@@ -21,7 +21,7 @@ class Team extends Component {
     render() {
         return (
             <div className='team'>
-                <div className='button'>{this.props.questionSelected ? this.getAddScoreButton() : null}</div>
+                <div className='button'>{this.props.selectedAnswer ? this.getAddScoreButton() : null}</div>
                 <div className='name'>{this.props.name}</div>
                 <div className='score'>{this.props.score}</div>
             </div>
@@ -31,8 +31,7 @@ class Team extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    questionSelected: state.question.selected,
-    questionValue: state.question.value
+    selectedAnswer: state.question.selectedAnswer
 })
 
 const mapDispatchToProps = {
