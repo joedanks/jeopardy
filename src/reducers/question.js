@@ -1,4 +1,5 @@
 import { data } from '../data/sampleGame';
+import { newAnswers } from '../actions/question';
 
 const storage = window.localStorage;
 
@@ -79,9 +80,15 @@ const question = (state = initialState, action) => {
                 board: newBoard
             }
         case 'RESET':
+            storage.removeItem('board');
+            storage.removeItem('answers');
+            let newAnswers = initialAnswers();
+            newBoard = initialBoard(newAnswers);
+            storage.setItem('answers', JSON.stringify(newAnswers));
+            storage.setItem('board', JSON.stringify(newBoard));
             return {
-                data: initialAnswers(),
-                board: initialBoard(initialAnswers()),
+                data: newAnswers,
+                board: newBoard,
             };
         default:
             return state;

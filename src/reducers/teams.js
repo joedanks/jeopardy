@@ -39,6 +39,7 @@ const teams = (state = initialState, action) => {
                     {}
                 );
         case 'RESET':
+            storage.removeItem('teams');
             return {};
         default:
             return state;

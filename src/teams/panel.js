@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Team from './team';
 import { newTeam } from '../actions/teams';
 import UploadAnswers from './uploadAnswers';
+import AddTeam from './add-team';
 
 import './panel.css';
 
@@ -13,6 +14,7 @@ class Panel extends Component {
         this.state = {
             addTeam: false
         }
+        this.inputRef = React.createRef();
         this.addTeam = this.addTeam.bind(this);
         this.showAddTeam = this.showAddTeam.bind(this);
         this.updateTeam = this.updateTeam.bind(this);
@@ -26,13 +28,15 @@ class Panel extends Component {
         })
     }
     addTeam() {
-        this.setState((prevState) => {
-            this.props.newTeam(prevState.teamName);
-            return {
-                addTeam: false,
-                teamName: ''
-            }
-        })
+        if (!this.props.teams.hasOwnProperty(this.state.teamName)) {
+            this.setState((prevState) => {
+                this.props.newTeam(prevState.teamName);
+                return {
+                    addTeam: false,
+                    teamName: ''
+                }
+            })
+        }
     }
     updateTeam(e) {
         this.setState({
@@ -53,24 +57,21 @@ class Panel extends Component {
     displayNewTeam() {
         if (this.state.addTeam) {
             return (
-                <div className="input-group mb-3">
-                    <input type="text" className="form-control" placeholder="Team Name" onChange={this.updateTeam} />
-                    <div className="input-group-append">
-                        <button type="button" onClick={this.addTeam} className="btn btn-outline-default">Add</button>
-                    </div>
-                    <div className="input-group-append">
-                        <button type="button" onClick={this.cancelTeam} className="btn btn-outline-default">Canel</button>
-                    </div>
-                </div>
+                <AddTeam updateTeam={this.updateTeam} addTeam={this.addTeam} cancelTeam={this.cancelTeam} />
             );
         }
         return (
             <div className='add-team' onClick={this.showAddTeam}>
-                <ion-icon name="person-add" />
+                <ion-icon name='person-add' />
                 &nbsp;
                 Add Team
             </div>
         );
+    }
+    componentDidUpdate() {
+        if (this.inputRef.current) {
+            this.inputRef.current.focus();
+        }
     }
     render() {
         return (
@@ -82,7 +83,7 @@ class Panel extends Component {
                     </div>
                     {this.buildTeams()}
                 </div>
-                <UploadAnswers/>
+                <UploadAnswers />
             </div>
         );
     }

@@ -13,13 +13,13 @@ class UploadAnswers extends Component {
         let reader = new FileReader();
         reader.onload = (event) => {
             // console.log(event.target.result);
+            window.localStorage.clear();
             this.props.reset();
             this.props.newAnswers(JSON.parse(event.target.result))
         }
         reader.readAsText(e.target.files[0]);
     }
     reset() {
-        window.localStorage.clear();
         document.querySelector("input[type='file']").value = '';
         this.props.reset();
     }

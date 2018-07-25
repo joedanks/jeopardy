@@ -15,7 +15,7 @@ class Team extends Component {
     }    
     getAddScoreButton() {
         return (
-            <ion-icon name="add-circle-outline" onClick={this.addPoints}></ion-icon>
+            <ion-icon name='add-circle-outline' onClick={this.addPoints}></ion-icon>
         );
     }
     render() {
