@@ -32,11 +32,13 @@ const initialBoard = (answers) => {
 
 const initialState = {
     data: initialAnswers(),
-    board: initialBoard(initialAnswers())
+    board: initialBoard(initialAnswers()),
+    selectedAnswer: JSON.parse(storage.getItem('answer'))
 }
 
 const question = (state = initialState, action) => {
-    let newBoard;
+    let newBoard,
+        selectedAnswer;
     switch (action.type) {
         case 'SELECT_ANSWER':
             newBoard = {
@@ -47,13 +49,15 @@ const question = (state = initialState, action) => {
                 }
             };
             storage.setItem('board', JSON.stringify(newBoard));
+            selectedAnswer = {
+                x: action.x,
+                y: action.y,
+                value: action.value
+            };
+            storage.setItem('answer', JSON.stringify(selectedAnswer));
             return {
                 ...state,
-                selectedAnswer: {
-                    x: action.x,
-                    y: action.y,
-                    value: action.value
-                },
+                selectedAnswer,
                 board: newBoard
             };
         case 'AWARD_POINTS':

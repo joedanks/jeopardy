@@ -30,7 +30,7 @@ class Cell extends Component {
 
     nextStateAvailable(currentState) {
         if (currentState === NUMBER) {
-            return !this.props.selectedAnswer;
+            return !this.props.questionSelected;
         }
         return false;
     }
