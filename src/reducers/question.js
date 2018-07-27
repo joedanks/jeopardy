@@ -1,5 +1,4 @@
 import { data } from '../data/sampleGame';
-import { newAnswers } from '../actions/question';
 
 const storage = window.localStorage;
 
@@ -61,6 +60,7 @@ const question = (state = initialState, action) => {
                 board: newBoard
             };
         case 'AWARD_POINTS':
+        case 'NO_POINTS':
             newBoard = {
                 ...state.board,
                 [state.selectedAnswer.x]: {

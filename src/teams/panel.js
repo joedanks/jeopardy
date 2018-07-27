@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Team from './team';
 import { newTeam } from '../actions/teams';
+import { noPoints } from '../actions/points';
 import UploadAnswers from './uploadAnswers';
 import AddTeam from './add-team';
 
@@ -26,6 +27,11 @@ class Panel extends Component {
 
             return (<Team key={i} name={name} score={score} />);
         })
+    }
+    buildNoWinner() {
+        return (
+            <button type='button' className='btn btn-outline-light' onClick={this.props.noPoints}>No Points</button>
+        );
     }
     addTeam() {
         if (!this.props.teams.hasOwnProperty(this.state.teamName)) {
@@ -82,6 +88,7 @@ class Panel extends Component {
                         {this.displayNewTeam()}
                     </div>
                     {this.buildTeams()}
+                    {this.props.selectedAnswer ? this.buildNoWinner() : null}
                 </div>
                 <UploadAnswers />
             </div>
@@ -90,11 +97,13 @@ class Panel extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    teams: state.teams
+    teams: state.teams,
+    selectedAnswer: state.question.selectedAnswer
 })
 
 const mapDispatchToProps = {
-    newTeam
+    newTeam,
+    noPoints
 }
 
 export default connect(

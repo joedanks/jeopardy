@@ -47,7 +47,7 @@
     display: grid;
     padding-top: 3px;
     padding-bottom: 3px;
-    grid-template-columns: 20% 50% 30%;
+    grid-template-columns: 15% 45% 15% 25%;
     grid-template-rows: 30px;
 }
 
@@ -68,6 +68,11 @@
 }
 
 ion-icon[name = "add-circle-outline"] {
+    cursor: pointer;
+    font-size: x-large;
+}
+
+ion-icon[name = "remove-circle-outline"] {
     cursor: pointer;
     font-size: x-large;
 }

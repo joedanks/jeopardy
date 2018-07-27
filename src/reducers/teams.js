@@ -2,7 +2,7 @@ const storage = window.localStorage;
 
 const initialTeams = () => {
     const storageTeams = storage.getItem('teams');
-    
+
     if (storageTeams) {
         return JSON.parse(storageTeams);
     }
@@ -29,8 +29,15 @@ const teams = (state = initialState, action) => {
             };
             storage.setItem('teams', JSON.stringify(newState));
             return newState;
+        case 'REVOKE_POINTS':
+            newState = {
+                ...state,
+                [action.name]: state[action.name] - action.value
+            };
+            storage.setItem('teams', JSON.stringify(newState));
+            return newState;
         case 'NEW_ANSWERS':
-            let bbb = Object.keys(state)
+            return Object.keys(state)
                 .reduce(
                     (acc, val) => ({
                         ...acc,
@@ -38,7 +45,6 @@ const teams = (state = initialState, action) => {
                     }),
                     {}
                 );
-            return bbb;
         case 'RESET':
             storage.removeItem('teams');
             return {};
