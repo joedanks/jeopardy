@@ -30,7 +30,7 @@ const teams = (state = initialState, action) => {
             storage.setItem('teams', JSON.stringify(newState));
             return newState;
         case 'NEW_ANSWERS':
-            return Object.keys(state)
+            let bbb = Object.keys(state)
                 .reduce(
                     (acc, val) => ({
                         ...acc,
@@ -38,6 +38,7 @@ const teams = (state = initialState, action) => {
                     }),
                     {}
                 );
+            return bbb;
         case 'RESET':
             storage.removeItem('teams');
             return {};

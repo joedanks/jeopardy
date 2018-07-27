@@ -12,12 +12,20 @@ class UploadAnswers extends Component {
     uploadData(e) {
         let reader = new FileReader();
         reader.onload = (event) => {
-            // console.log(event.target.result);
-            window.localStorage.clear();
-            this.props.reset();
-            this.props.newAnswers(JSON.parse(event.target.result))
+            try {
+                const newAnswers = JSON.parse(event.target.result);
+                if (newAnswers.length === 6) {
+                    this.props.newAnswers(newAnswers);
+                } else {
+                    alert('Invalid file');
+                }
+            } catch (error) {
+                alert('Invalid file');
+            }
         }
-        reader.readAsText(e.target.files[0]);
+        if (e.target.files && e.target.files.length) {
+            reader.readAsText(e.target.files[0]);
+        }
     }
     reset() {
         document.querySelector("input[type='file']").value = '';

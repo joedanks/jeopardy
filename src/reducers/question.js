@@ -69,6 +69,7 @@ const question = (state = initialState, action) => {
                 }
             };
             storage.setItem('board', JSON.stringify(newBoard));
+            storage.removeItem('answer');
             return {
                 ...state,
                 board: newBoard,
@@ -76,16 +77,20 @@ const question = (state = initialState, action) => {
             }
         case 'NEW_ANSWERS':
             storage.setItem('answers', JSON.stringify(action.data));
+            storage.removeItem('board');
             newBoard = initialBoard(action.data);
             storage.setItem('board', JSON.stringify(newBoard));
+            storage.removeItem('answer');
             return {
                 ...state,
                 data: action.data,
-                board: newBoard
+                board: newBoard,
+                selectedAnswer: undefined
             }
         case 'RESET':
             storage.removeItem('board');
             storage.removeItem('answers');
+            storage.removeItem('answer');
             let newAnswers = initialAnswers();
             newBoard = initialBoard(newAnswers);
             storage.setItem('answers', JSON.stringify(newAnswers));
