@@ -59,8 +59,8 @@
     font-size: large;
 }
 
-.team .score::before {
-    content: '$';
+.team .score.negative {
+    color: red;
 }
 
 .team .score {

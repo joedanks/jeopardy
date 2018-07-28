@@ -27,13 +27,25 @@ class Team extends Component {
             <ion-icon name='remove-circle-outline' onClick={this.revokePoints}></ion-icon>
         );
     }
+    renderScore() {
+        if (this.props.score < 0) {
+            const score = Math.abs(this.props.score);
+            return (
+                <div className='score negative'>-${score}</div>
+            );
+        } else {
+            return (
+                <div className='score'>${this.props.score}</div>
+            );
+        }
+    }
     render() {
         return (
             <div className='team'>
                 <div className='button'>{this.props.selectedAnswer ? this.getAddScoreButton() : null}</div>
                 <div className='name'>{this.props.name}</div>
                 <div className='button'>{this.props.selectedAnswer ? this.getMinusScoreButton() : null}</div>
-                <div className='score'>{this.props.score}</div>
+                {this.renderScore()}
             </div>
         );
     }
